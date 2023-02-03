@@ -30,6 +30,9 @@ class ShipmentOptions extends BaseResource
     /** @var bool */
     public $signature;
 
+    /** @var bool */
+    public $add_return_label;
+
     public function __construct(array $attributes = [])
     {
         $this->setDefaultOptions();
@@ -44,6 +47,7 @@ class ShipmentOptions extends BaseResource
         $this->only_recipient = false;
         $this->extra_assurance = false;
         $this->evening_delivery = false;
+        $this->add_return_label = false;
 
         return $this;
     }
@@ -134,6 +138,11 @@ class ShipmentOptions extends BaseResource
             ->when($this->evening_delivery, function ($collection) {
                 return $collection->push([
                     'key' => 'EVE',
+                ]);
+            })
+            ->when($this->add_return_label, function ($collection) {
+                return $collection->push([
+                    'key' => 'ADD_RETURN_LABEL',
                 ]);
             })
             ->all();

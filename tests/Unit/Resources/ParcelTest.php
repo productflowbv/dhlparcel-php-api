@@ -52,6 +52,7 @@ class ParcelTest extends TestCase
                 'signature' => true,
                 'extra_assurance' => true,
                 'evening_delivery' => true,
+                'add_return_label' => true,
             ],
             'pieces' => [
                 [
@@ -75,6 +76,7 @@ class ParcelTest extends TestCase
         $this->assertSame(true, $parcel->options->signature);
         $this->assertSame(true, $parcel->options->extra_assurance);
         $this->assertSame(true, $parcel->options->evening_delivery);
+        $this->assertSame(true, $parcel->options->add_return_label);
     }
 
     /** @test */
@@ -305,6 +307,25 @@ class ParcelTest extends TestCase
         $this->assertEquals('SMALL', $array['pieces'][0]['parcelType']);
         $this->assertSame(1, $array['pieces'][0]['quantity']);
         $this->assertArrayNotHasKey('weight', $array['pieces'][0]);
+    }
+
+    public function it_can_set_a_add_return_label_assured()
+    {
+        $parcel = new Parcel();
+
+        $this->assertFalse($parcel->options->add_return_label);
+
+        $parcel->addReturnLabel();
+
+        $this->assertTrue($parcel->options->add_return_label);
+    }
+
+    /** @test */
+    public function calling_the_add_return_label_returns_the_same_parcel_instance()
+    {
+        $parcel = new Parcel();
+
+        $this->assertSame($parcel, $parcel->addReturnLabel());
     }
 
     /** @test */
