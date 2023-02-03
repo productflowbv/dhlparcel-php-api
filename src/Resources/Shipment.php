@@ -13,6 +13,9 @@ class Shipment extends BaseResource
     public $barcode;
 
     /** @var string */
+    public $return_barcode;
+
+    /** @var string */
     public $label_id;
 
     /** @var \Tightenco\Collect\Support\Collection */
