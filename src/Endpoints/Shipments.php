@@ -27,7 +27,17 @@ class Shipments extends BaseEndpoint implements ShouldAuthenticate
         collect($response->pieces)->each(function ($item) use ($shipment) {
             $shipment->pieces->add(new ShipmentPiece([
                 'label_id' => $item->labelId,
-                'label_type' => $item->labelType,
+                'label_type' => $item->labelType ?? '',
+                'parcel_type' => $item->parcelType,
+                'piece_number' => $item->pieceNumber,
+                'tracker_code' => $item->trackerCode,
+            ]));
+        });
+
+        collect($response?->returnShipment?->pieces)->each(function ($item) use ($shipment) {
+            $shipment->return_pieces->add(new ShipmentPiece([
+                'label_id' => $item->labelId,
+                'label_type' => $item->labelType ?? '',
                 'parcel_type' => $item->parcelType,
                 'piece_number' => $item->pieceNumber,
                 'tracker_code' => $item->trackerCode,
