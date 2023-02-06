@@ -28,6 +28,7 @@ class Shipment extends BaseResource
     public function __construct(array $attributes = [])
     {
         $this->pieces = new Collection;
+        $this->return_pieces = new Collection;
 
         parent::__construct($attributes);
     }
