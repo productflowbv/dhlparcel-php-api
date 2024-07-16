@@ -201,4 +201,25 @@ class ShipmentOptionsTest extends TestCase
             ],
         ], $array);
     }
+
+    /** @test */
+    public function to_array_with_add_return_label()
+    {
+        $options = new ShipmentOptions([
+            'add_return_label' => true,
+        ]);
+
+        $array = $options->toArray();
+
+        $this->assertIsArray($array);
+
+        $this->assertEquals([
+            [
+                'key' => 'DOOR',
+            ],
+            [
+                'key' => 'ADD_RETURN_LABEL',
+            ],
+        ], $array);
+    }
 }

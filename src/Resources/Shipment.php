@@ -13,14 +13,22 @@ class Shipment extends BaseResource
     public $barcode;
 
     /** @var string */
+    public $return_barcode;
+
+    /** @var string */
     public $label_id;
 
     /** @var \Tightenco\Collect\Support\Collection */
     public $pieces;
 
+    /** @var \Tightenco\Collect\Support\Collection */
+    public $return_pieces;
+
+
     public function __construct(array $attributes = [])
     {
         $this->pieces = new Collection;
+        $this->return_pieces = new Collection;
 
         parent::__construct($attributes);
     }
