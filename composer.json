@@ -19,10 +19,10 @@
         "php": "^8.0",
         "ext-json": "*",
         "composer/ca-bundle": "^1.2",
-        "guzzlehttp/guzzle": "^7.1",
+        "guzzlehttp/guzzle": "^7.1|^8",
         "lcobucci/jwt": "^3.4 || ^4.0",
         "ramsey/uuid": "^4.0",
-        "illuminate/collections": "^10.0|^11.0|^12.0"
+        "illuminate/collections": "^10.0|^11.0|^12.0|^13.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4",
