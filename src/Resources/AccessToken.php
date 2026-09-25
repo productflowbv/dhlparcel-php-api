@@ -3,7 +3,6 @@
 namespace Mvdnbrk\DhlParcel\Resources;
 
 use DateTimeImmutable;
-use Lcobucci\JWT\Configuration;
 
 class AccessToken
 {
@@ -28,11 +27,12 @@ class AccessToken
 
     private function parseToken(): void
     {
-        $token = Configuration::forUnsecuredSigner()->parser()->parse($this->token);
+        $payload = explode('.', $this->token)[1] ?? '';
+        $claims = json_decode(base64_decode(strtr($payload, '-_', '+/')), true) ?: [];
 
-        $this->expiresAt = $token->claims()->get('exp') ?: new DateTimeImmutable;
-        $this->accounts = $token->claims()->get('accounts');
-        $this->roles = $token->claims()->get('roles');
+        $this->expiresAt = isset($claims['exp']) ? new DateTimeImmutable('@'.$claims['exp']) : new DateTimeImmutable;
+        $this->accounts = $claims['accounts'] ?? null;
+        $this->roles = $claims['roles'] ?? null;
     }
 
     public function isExpired(): bool
